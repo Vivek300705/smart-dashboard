@@ -64,7 +64,7 @@ export const getWeatherData = async (lat, lon) => {
 // News API Service
 export const getNewsData = async () => {
   try {
-    const url = `${API_CONFIG.news.baseUrl}/top-headlines?country=us&apiKey=${API_CONFIG.news.key}`;
+    const url = `${API_CONFIG.news.baseUrl}/top-headlines?country=in&apiKey=${API_CONFIG.news.key}`;
     const response = await fetch(url);
 
     if (!response.ok) {
