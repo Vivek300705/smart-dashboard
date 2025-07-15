@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useGeolocation } from "./hooks/useGeolocation";
+import LoadingSpinner from "./components/LoadingSpinner";
+import LocationError from "./components/LocationError";
+import DashboardLayout from "./components/DashboardLayout";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+  const { coords, loading, error, retry } = useGeolocation();
+
+  if (loading) {
+    return <LoadingSpinner message="Getting your location..." />;
+  }
+
+  if (error && !coords) {
+    return <LocationError error={error} onRetry={retry} />;
+  }
+
+  return <DashboardLayout coords={coords} />;
+};
 
 export default App;
